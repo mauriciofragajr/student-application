@@ -1,5 +1,6 @@
-import { ValidatorConstraintInterface } from "class-validator";
+import { ValidatorConstraint, ValidatorConstraintInterface } from "class-validator";
 
+@ValidatorConstraint({name: 'IsCPF'})
 export class CpfValidator implements ValidatorConstraintInterface {
   validate(cpf: string) {
     cpf = this.cleanString(cpf)

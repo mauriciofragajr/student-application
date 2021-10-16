@@ -1,11 +1,13 @@
 import { Field, InputType } from "@nestjs/graphql";
-import { IsEmail, IsNotEmpty, IsString, MaxLength, MinLength } from "class-validator";
+import { IsEmail, IsNotEmpty, IsString, MaxLength, MinLength, Validate } from "class-validator";
+import { CpfValidator } from "src/validators/cpf-validator/cpf-validator";
 
 @InputType()
 export class CreateStudentInput {
     @Field()
-    @IsString()
-    @IsNotEmpty({ message: 'CPF is empty' })
+    @Validate(CpfValidator, {
+        message: 'CPF is not valid'
+    })
     cpf: string;
 
     @Field()
