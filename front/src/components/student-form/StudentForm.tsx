@@ -41,7 +41,7 @@ const StudentForm: React.FC = () => {
           </InputMask>
           <TextField type="text" {...name} label="Nome" variant="outlined" />
           <TextField type="email" {...email} label="E-mail" variant="outlined" />
-          {error ? <Alert severity="error">{error.message === 'Entity already exists' ? 'CPF já cadastrado' : 'CPF inválido'}</Alert> : null}
+          {error ? <Alert severity="error">{error.message === 'Entity already exists' ? 'CPF já cadastrado' : 'Dados inválidos!'}</Alert> : null}
           {data ? <Alert severity="success">Salvo com sucesso!</Alert> : null}
           <TextField type="submit" value="Adicionar" />
         </Stack>
