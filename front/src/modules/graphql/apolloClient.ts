@@ -2,7 +2,7 @@ import { ApolloClient, from, HttpLink, InMemoryCache } from '@apollo/client';
 import { onError } from "@apollo/client/link/error";
 
 const httpLink = new HttpLink({
-  uri: `${process.env.REACT_APP_GRAPHQL_URI}/graphql`
+  uri: process.env.REACT_APP_GRAPHQL_URI ? `${process.env.REACT_APP_GRAPHQL_URI}/graphql` : 'http://localhost:3000/graphql'
 });
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
