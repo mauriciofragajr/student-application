@@ -8,9 +8,9 @@ interface OffsetPageInfo {
 
 interface StudentsData {
   students: {
-    pageInfo: OffsetPageInfo
+    pageInfo?: OffsetPageInfo
     nodes: Student[]
-    totalCount: number
+    totalCount?: number
   }
 }
 
@@ -22,11 +22,7 @@ const GET_STUDENTS_FILTER = gql`
           name
           email
         },
-        totalCount,
-        pageInfo {
-          hasNextPage
-          hasPreviousPage
-        }
+        totalCount
       }
     }
   `
