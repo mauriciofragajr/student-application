@@ -24,7 +24,7 @@ const StudentList: React.FC = () => {
             </TableHead>
             <TableBody>
               {rows.map((row) => (
-                <TableRow key={row.name}>
+                <TableRow key={row.cpf}>
                   <TableCell>{row.cpf}</TableCell>
                   <TableCell>{row.name}</TableCell>
                   <TableCell>{row.email}</TableCell>
