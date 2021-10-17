@@ -15,6 +15,18 @@ services:
     command: npm run start:debug
     networks:
       - backend
+    environment:
+      TYPEORM_CONNECTION: ${TYPEORM_CONNECTION} 
+      TYPEORM_HOST: ${TYPEORM_HOST} 
+      TYPEORM_USERNAME: ${TYPEORM_USERNAME} 
+      TYPEORM_PASSWORD: ${TYPEORM_PASSWORD} 
+      TYPEORM_DATABASE: ${TYPEORM_DATABASE} 
+      TYPEORM_PORT: ${TYPEORM_PORT} 
+      TYPEORM_SYNCHRONIZE: ${TYPEORM_SYNCHRONIZE} 
+      TYPEORM_LOGGING: ${TYPEORM_LOGGING} 
+      TYPEORM_CACHE: ${TYPEORM_CACHE} 
+      TYPEORM_ENTITIES: ${TYPEORM_ENTITIES}
+      API_PORT: ${API_PORT}
     depends_on:
       - postgres
   postgres:
@@ -31,7 +43,26 @@ services:
       - 5432
     volumes:
       - api_db_data:/var/lib/postgresql/data
+  front:
+    container_name: react_app
+    build:
+      context: ./front
+      target: development
+    volumes:
+      - ./front:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 8080:8080
+    command: npm run start
+    networks:
+      - backend
+      - frontend
+    environment:
+      REACT_APP_GRAPHQL_URI: ${REACT_APP_GRAPHQL_URI}
+    depends_on:
+      - api
 networks:
   backend:
+  frontend:
 volumes:
   api_db_data:
