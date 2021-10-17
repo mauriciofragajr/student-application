@@ -6,6 +6,7 @@ import { ApolloProvider } from '@apollo/client';
 import { client } from '../modules/graphql/apolloClient';
 
 import StudentList from './student-list/StudentList';
+import StudentForm from './student-form/StudentForm';
 
 const App: React.FC = () => {
   return (
@@ -13,8 +14,11 @@ const App: React.FC = () => {
       <Router>
         <Header/>
         <Switch>
-          <Route path="/">
+          <Route path="/" exact>
             <StudentList/>
+          </Route>
+          <Route path="/add-student">
+            <StudentForm/>
           </Route>
         </Switch>
       </Router>
