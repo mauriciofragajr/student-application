@@ -1,16 +1,14 @@
 # Student App
 
-Um projeto para gerenciar estudantes, onde é possível incluir e buscar pelos seus respectivos campos.
+Um projeto para gerenciar estudantes, onde é possível incluir e buscar pelos seus respectivos campos. O requisitos era que fosse desenvolvido uma api com GraphQL e um front utilizando ReactJS.
 
-
-
-## Rodando localmente
+## Rodando o projeto
 
 ### Pré-requisitos
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
 [Git](https://git-scm.com) e [Docker](https://www.java.com/pt-BR/)
 
-### Subindo os serviços
+### Clonando o projeto
 
 Clone o projeto
 
@@ -29,15 +27,42 @@ Copie o arquivo .env.example e crie o seu .env
 ```bash
   cp .env.example .env
 ```
+Separei os ambientes em dois docker-compose. Onde o de desenvolvimento permite um recarregamento automático em toda a alteração do código, enquanto o de produção está otimizado e pronto para levar a um ambiente produtivo.
 
-Inicie os serviços com o docker-compose
+#### Executando em produção
+
+Inicie os serviços com o docker-compose.
+Rode com o o parâmetro -d para que seja executado em segundo plano, ou sem ele para ver os logs dos containers.
 
 ```bash
   docker-compose up -d
 ```
 
-Se tudo estiver correto o webapp estará rodando na porta 8080 do [localhost:8080](http://localhost:8080).
-O playground do graphql está ativado por default, então basta acessar [http://localhost:3000/graphql](http://localhost:3000/graphql)
+Se tudo estiver correto o webapp estará rodando na porta 8080 do [localhost:8080](http://localhost:8080)
+
+#### Executando em desenvolvimento
+
+Executando o comando a seguir você levanta os containers utilizando o modo desenvolvimento. Você conseguirá os logs em tempo real conforme for alterando o código.
+
+```bash
+  docker-compose -f docker-compose.development.yml up
+```
+
+Se tudo estiver correto o webapp estará rodando na porta 8080 do [localhost:8080](http://localhost:8080)
+
+## Testes automatizados
+
+Para executar os testes unitários da api basta ir até a pasta
+
+```bash
+  cd api
+```
+
+E executar o comando
+
+```bash
+  npm run test
+```
 
 ## 🛠 Tecnologias
 As seguintes tecnologias foram usadas na construção do projeto:
