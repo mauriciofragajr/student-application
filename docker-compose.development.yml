@@ -2,10 +2,10 @@ version: '3.7'
 
 services:
   api:
-    container_name: nest_api
+    container_name: student_api
     build:
       context: ./api
-      target: development
+      dockerfile: Dockerfile.development
     volumes:
       - ./api:/usr/src/app
       - /usr/src/app/node_modules
@@ -30,7 +30,7 @@ services:
     depends_on:
       - postgres
   postgres:
-    container_name: nest_db
+    container_name: student_db
     image: postgres:9.6-alpine
     networks:
       - backend
@@ -44,10 +44,10 @@ services:
     volumes:
       - api_db_data:/var/lib/postgresql/data
   front:
-    container_name: react_app
+    container_name: student_app
     build:
       context: ./front
-      target: development
+      dockerfile: Dockerfile.development
     volumes:
       - ./front:/usr/src/app
       - /usr/src/app/node_modules
