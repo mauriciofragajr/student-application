@@ -1,28 +1,23 @@
-FROM node:12 As development
+FROM node:14.18.1-alpine as builder
 
-WORKDIR /usr/src/app
+ENV NODE_ENV build
 
-COPY package*.json .
+WORKDIR /home/node
 
-RUN npm install
+COPY . /home/node
 
-COPY . .
+RUN npm ci \
+    && npm run build \
+    && npm prune --production
 
-RUN npm run build
+FROM node:14.18.1-alpine
 
-FROM node:12 as production
+ENV NODE_ENV production
 
-ARG NODE_ENV=production
-ENV NODE_ENV=${NODE_ENV}
+WORKDIR /home/node
 
-WORKDIR /usr/src/app
-
-COPY package*.json .
-
-RUN npm install --only=production
-
-COPY . .
-
-COPY --from=development /usr/src/app/dist ./dist
+COPY --from=builder /home/node/package*.json /home/node/
+COPY --from=builder /home/node/node_modules/ /home/node/node_modules/
+COPY --from=builder /home/node/dist/ /home/node/dist/
 
 CMD ["node", "dist/main"]

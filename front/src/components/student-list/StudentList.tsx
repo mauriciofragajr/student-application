@@ -63,9 +63,6 @@ const StudentList: React.FC = () => {
               <Box sx={{ mx: 0.5 }}>
                 <TextField type="submit" value="Pesquisar" />
               </Box>
-              <Box sx={{ mx: 0.5 }}>
-                <TextField type="reset" value="Limpar" />
-              </Box>
             </Box>
           </form>
 
